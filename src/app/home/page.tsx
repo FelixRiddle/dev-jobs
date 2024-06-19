@@ -1,11 +1,11 @@
-import "../../public/css/app.css";
+import "../../../public/css/app.css";
 
 /**
- * Home component
  * 
  * @returns 
  */
-export default function Home() {
+export default function Page() {
+    
     return (
         <div className="lista-vacantes">
             {/* Section of job postings */}
