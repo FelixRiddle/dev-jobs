@@ -1,5 +1,5 @@
-import apiUrl from "@/app/lib/mappings/apiUrl";
 import Header from "@/components/header/Header";
+import apiUrl from "@/lib/mappings/apiUrl";
 import Script from "next/script";
 
 /**

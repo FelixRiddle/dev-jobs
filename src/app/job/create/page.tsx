@@ -1,4 +1,5 @@
-import apiUrl from "@/app/lib/mappings/apiUrl";
+import { allSkills } from "@/lib/job/jobSkills";
+import apiUrl from "@/lib/mappings/apiUrl";
 
 /**
  * Create
@@ -57,6 +58,21 @@ export default function Page() {
 						required
 					/>
 					<trix-editor input="description"></trix-editor>
+				</div>
+				
+				<h3>Knowledge</h3>
+				<ul className="lista-conocimientos">
+					{allSkills().map(skill => {
+						return (
+                            <li key={skill}>
+								{skill}
+                            </li>
+                        );
+					})}
+				</ul>
+				
+				<div className="campo centrar-horizontal">
+					<input type="submit" value="Publish" className="btn btn-azul"/>
 				</div>
             </form>
         </div>
