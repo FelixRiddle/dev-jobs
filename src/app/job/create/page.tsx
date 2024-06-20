@@ -1,5 +1,8 @@
+"use client";
+
 import { allSkills } from "@/lib/job/jobSkills";
 import apiUrl from "@/lib/mappings/apiUrl";
+import { useState } from "react";
 
 /**
  * Create
@@ -8,6 +11,30 @@ import apiUrl from "@/lib/mappings/apiUrl";
  */
 export default function Page() {
 	const url = apiUrl();
+	const [skills, setSkills] = useState(new Set());
+	
+	/**
+	 * Called on skill click
+	 */
+	function skillClick(e: any) {
+		const skillName = e.target.textContent;
+		
+		if(e.target.classList.contains("activo")) {
+			setSkills((skills) => {
+				skills.delete(skillName);
+				return skills;
+			});
+			
+			e.target.classList.remove("activo");
+		} else {
+			setSkills((skills) => {
+				skills.add(skillName);
+				return skills;
+			});
+			
+			e.target.classList.add("activo");
+		}
+	}
 	
     return (
         <div className="contenedor">
@@ -64,7 +91,7 @@ export default function Page() {
 				<ul className="lista-conocimientos">
 					{allSkills().map(skill => {
 						return (
-                            <li key={skill}>
+                            <li key={skill} onClick={skillClick}>
 								{skill}
                             </li>
                         );
