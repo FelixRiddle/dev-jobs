@@ -2,7 +2,7 @@
 
 import { allSkills } from "@/lib/job/jobSkills";
 import apiUrl from "@/lib/mappings/apiUrl";
-import { useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 
 /**
  * Create
@@ -12,6 +12,7 @@ import { useState } from "react";
 export default function Page() {
 	const url = apiUrl();
 	const [skills, setSkills] = useState(new Set());
+	const skillsElement: MutableRefObject<null | HTMLInputElement> = useRef(null);
 	
 	/**
 	 * Called on skill click
@@ -34,11 +35,20 @@ export default function Page() {
 			
 			e.target.classList.add("activo");
 		}
+		
+		if(skillsElement.current) {
+			const skillsArray: Array<string> = [...skills] as Array<string>;
+			skillsElement.current.value = skillsArray.join(",");
+		}
 	}
 	
     return (
         <div className="contenedor">
-            <form action={`${url}/job/create`} method="POST" className="default-form">
+            <form
+				action={`${url}/job/create`}
+				method="POST"
+				className="default-form"
+			>
                 <h3>
                     General information
                 </h3>
@@ -99,6 +109,7 @@ export default function Page() {
 				</ul>
 				
 				<div className="campo centrar-horizontal">
+					<input type="hidden" name="skills" id="skills" ref={skillsElement} />
 					<input type="submit" value="Publish" className="btn btn-azul"/>
 				</div>
             </form>
