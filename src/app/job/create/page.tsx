@@ -6,9 +6,11 @@ import apiUrl from "@/app/lib/mappings/apiUrl";
  * @returns 
  */
 export default function Page() {
+	const url = apiUrl();
+	
     return (
         <div className="contenedor">
-            <form action={`${apiUrl()}/job/create`} method="POST" className="default-form">
+            <form action={`${url}/job/create`} method="POST" className="default-form">
                 <h3>
                     General information
                 </h3>
@@ -43,11 +45,19 @@ export default function Page() {
                         <option value="temporal">Temporal</option>
                     </select>
                 </div>
-                
-                <div className="campo">
-                    <label htmlFor="description">Description</label>
-                    <textarea name="description" id="description" cols={30} rows={10} placeholder="Description" required></textarea>
-                </div>
+				
+				<h3>Job description</h3>
+				<div className="campo descripcion">
+					<label htmlFor="description">Description</label>
+					<input 
+						type="hidden"
+						name="description"
+						id="description"
+						placeholder="Description"
+						required
+					/>
+					<trix-editor input="description"></trix-editor>
+				</div>
             </form>
         </div>
     );

@@ -22,9 +22,7 @@ export default function Header({
 		<div>
 			{/* Top bar */}
             <div className="nombre-sitio contenedor">
-				<h1
-					className="nombre-sitio contenedor"
-				>
+				<h1>
 					<Link href="/home">devJobs</Link>
 				</h1>
                 
