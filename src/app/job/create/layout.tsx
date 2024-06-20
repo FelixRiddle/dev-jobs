@@ -1,28 +1,24 @@
-import "../../../public/css/app.css";
 import Header from "@/components/header/Header";
 
 /**
- * Layout
- * 
- * @returns 
+ * Create layout
  */
 export default function Layout({
-    children,
+	children
 }: {
-    children: React.ReactNode;
+	children: React.ReactNode,
 }) {
-    return (
+	return (
         <div>
 			<Header
 				title="Create a job"
 				tagline="Fill the formulary and create a new job"
 				bar={true}
-				button={true}
 			/>
-            
+			
             <main className="contenido-principal contenedor">
-                {children}
-            </main>
-        </div>
+				{children}
+			</main>
+		</div>
     );
 }
