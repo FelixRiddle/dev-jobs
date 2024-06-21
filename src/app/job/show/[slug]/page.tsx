@@ -56,8 +56,9 @@ export default async function Page({
 	return (
         <div>
 			<Header
-				title="Create a job"
-				tagline="Fill the formulary and create a new job"
+				title={job.title}
+				tagline={job.company}
+				bar={true}
 			/>
 			
 			<main className="contenido-principal contenedor">
