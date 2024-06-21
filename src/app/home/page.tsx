@@ -21,9 +21,19 @@ export async function getAllJobs() {
 		
 		const response = await instance.get("/job/get_all");
 		
+		// Data
 		const data = response.data;
+		if(!data) {
+			return [];
+		}
 		
-		return data;
+		// Jobs
+		const jobs = data.jobs;
+		if(!jobs) {
+			return [];
+		}
+		
+		return jobs;
 	} catch(err) {
 		console.error(err);
 		
@@ -43,36 +53,40 @@ export default async function Page() {
             {/* Section of job postings */}
             <h2>List of job postings</h2>
             
-            <div className="vacante">
-                <div className="caja">
-                    <h3>Facebook</h3>
-                    <p className="puesto">React developer</p>
-                </div>
-                
-                <div className="caja">
-                    <p className="etiqueta">
-                        Location
-                    </p>
-                    <p className="nombre">
-                        Remote
-                    </p>
-                </div>
-                
-                <div className="caja">
-                    <p className="etiqueta">
-                        Contract
-                    </p>
-                    <p className="nombre contrato">
-                        Full-time
-                    </p>
-                </div>
-                
-                <div className="caja centrar-vertical">
-                    <a href="#" className="btn btn-verde">
-                        More information
-                    </a>
-                </div>
-            </div>
+			{jobs.map((job: any) => {
+				return (
+					<div className="vacante">
+						<div className="caja">
+							<h3>{job.company}</h3>
+							<p className="puesto">{job.title}</p>
+						</div>
+						
+						<div className="caja">
+							<p className="etiqueta">
+								Location
+							</p>
+							<p className="nombre">
+								{job.location}
+							</p>
+						</div>
+						
+						<div className="caja">
+							<p className="etiqueta">
+								Contract
+							</p>
+							<p className="nombre contrato">
+								{job.contract}
+							</p>
+						</div>
+						
+						<div className="caja centrar-vertical">
+							<a href="#" className="btn btn-verde">
+								More information
+							</a>
+						</div>
+					</div>
+				);
+			})}
         </div>
     );
 }

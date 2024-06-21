@@ -14,8 +14,8 @@ export default function Layout({
     return (
         <div>
 			<Header
-				title="Create a job"
-				tagline="Fill the formulary and create a new job"
+				title="Homepage"
+				tagline="Find and post developer jobs"
 				bar={true}
 				button={true}
 			/>
