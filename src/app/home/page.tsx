@@ -80,7 +80,7 @@ export default async function Page() {
 						</div>
 						
 						<div className="caja centrar-vertical">
-							<a href="#" className="btn btn-verde">
+							<a href={`/job/show/${job.url}`} className="btn btn-verde">
 								More information
 							</a>
 						</div>

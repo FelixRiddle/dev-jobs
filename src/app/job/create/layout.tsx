@@ -24,7 +24,6 @@ export default function Layout({
 			<Header
 				title="Create a job"
 				tagline="Fill the formulary and create a new job"
-				// bar={true}
 			/>
 			
             <main className="contenido-principal contenedor">
