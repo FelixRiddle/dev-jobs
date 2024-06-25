@@ -17,6 +17,7 @@ export default function EditJobFrontend({
 	const url = apiUrl();
 	const [skills, setSkills] = useState(new Set());
 	const skillsElement: MutableRefObject<null | HTMLInputElement> = useRef(null);
+	const everySkills = allSkills();
 	
 	/**
 	 * Called on skill click
@@ -45,6 +46,8 @@ export default function EditJobFrontend({
 			skillsElement.current.value = skillsArray.join(",");
 		}
 	}
+	
+	console.log(`Skills: `, job.skills);
 	
 	return (
         <div className="contenedor">
@@ -104,9 +107,11 @@ export default function EditJobFrontend({
 				
 				<h3>Knowledge</h3>
 				<ul className="lista-conocimientos">
-					{allSkills().map(skill => {
+					{everySkills.map(skill => {
+						const active = job.skills.includes(skill) ? "activo" : "";
+						
 						return (
-							<li key={skill} onClick={skillClick}>
+							<li key={skill} className={active} onClick={skillClick}>
 								{skill}
 							</li>
 						);
