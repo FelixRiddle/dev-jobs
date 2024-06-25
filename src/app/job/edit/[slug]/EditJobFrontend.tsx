@@ -59,22 +59,22 @@ export default function EditJobFrontend({
 				
 				<div className="campo">
 					<label htmlFor="title">Title</label>
-					<input type="text" name="title" id="title" placeholder="Title" required />
+					<input type="text" value={job.title} name="title" id="title" placeholder="Title" required />
 				</div>
 				
 				<div className="campo">
 					<label htmlFor="company">Company</label>
-					<input type="text" name="company" id="company" placeholder="Company" required />
+					<input type="text" value={job.company} name="company" id="company" placeholder="Company" required />
 				</div>
 				
 				<div className="campo">
 					<label htmlFor="location" className="location">Location</label>
-					<input type="text" name="location" id="location" placeholder="Location" required />
+					<input type="text" value={job.location} name="location" id="location" placeholder="Location" required />
 				</div>
 				
 				<div className="campo">
 					<label htmlFor="salary">Salary</label>
-					<input type="text" name="salary" id="salary" placeholder="Salary" required />
+					<input type="text" value={job.salary} name="salary" id="salary" placeholder="Salary" required />
 				</div>
 				
 				<div className="campo">
@@ -93,6 +93,7 @@ export default function EditJobFrontend({
 					<label htmlFor="description">Description</label>
 					<input 
 						type="hidden"
+						value={job.description}
 						name="description"
 						id="description"
 						placeholder="Description"
