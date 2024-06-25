@@ -1,6 +1,8 @@
 "use client";
 
+import apiUrl from "@/lib/mappings/apiUrl";
 import Job from "@/lib/types/Job";
+import Link from "next/link";
 
 /**
  * Job frontend
@@ -10,6 +12,7 @@ export default function JobFrontend({
 }: {
 	job: Job,
 }) {
+	const url = apiUrl();
 	
 	return (
 		<div>
@@ -33,11 +36,13 @@ export default function JobFrontend({
 			</div>
 			
 			<div className="vacante-contenedor contenedor">
-				<main className="contenido">
+				<div className="contenido">
 					<h2>Job description</h2>
 					<div className="vacante-descripcion" dangerouslySetInnerHTML={{ __html: job.description ?? "", }}>
 					</div>
-				</main>
+					
+					<Link href={`${url}/job/edit/${job.url}`} className="btn btn-azul editar-btn">Edit job</Link>
+				</div>
 				<aside className="sidebar">
 					<h2>Required knowledge</h2>
 					<ul className="skills">
@@ -51,7 +56,6 @@ export default function JobFrontend({
 					</ul>
 				</aside>
 			</div>
-			
 		</div>
 	);
 }

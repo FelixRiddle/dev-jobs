@@ -1,6 +1,6 @@
 import Header from "@/components/header/Header";
 import apiUrl from "@/lib/mappings/apiUrl";
-import Script from "next/script";
+import ImportTrix from "./ImportTrix";
 
 /**
  * Create layout
@@ -14,12 +14,7 @@ export default function Layout({
 	
 	return (
         <div>
-			{/* Trix */}
-			<link rel="stylesheet" href={`${url}/package/trix@2.1.1/dist/trix.css`} />
-			
-			<Script
-				src={`${url}/package/trix@2.1.1/dist/trix.umd.js`}
-			/>
+			<ImportTrix />
 			
 			<Header
 				title="Create a job"
