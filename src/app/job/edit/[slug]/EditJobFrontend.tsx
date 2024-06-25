@@ -1,6 +1,6 @@
 "use client";
 
-import { MutableRefObject, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 
 import apiUrl from "@/lib/mappings/apiUrl";
 import Job from "@/lib/types/Job";
@@ -15,7 +15,7 @@ export default function EditJobFrontend({
 	job: Job,
 }) {
 	const url = apiUrl();
-	const [skills, setSkills] = useState(new Set());
+	const [skills, setSkills] = useState(new Set(job.skills));
 	const skillsElement: MutableRefObject<null | HTMLInputElement> = useRef(null);
 	const everySkills = allSkills();
 	
@@ -47,7 +47,13 @@ export default function EditJobFrontend({
 		}
 	}
 	
-	console.log(`Skills: `, job.skills);
+	// Select skills
+	useEffect(() => {
+		const skillsElement: HTMLInputElement = document.querySelector("#skills") as HTMLInputElement;
+		if(skillsElement) {
+			skillsElement.value = job.skills.join(",");
+		}
+	}, []);
 	
 	return (
         <div className="contenedor">
