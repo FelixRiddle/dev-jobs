@@ -88,7 +88,7 @@ export default function EditJobFrontend({
 				
 				<div className="campo">
 					<label htmlFor="contract">Contract</label>
-					<select name="contract" id="contract" defaultValue="">
+					<select name="contract" id="contract" defaultValue={job.contract}>
 						<option value="" disabled>- Select one -</option>
 						<option value="full-time">Full-time</option>
 						<option value="part-time">Part-time</option>
