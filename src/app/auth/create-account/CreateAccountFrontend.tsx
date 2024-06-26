@@ -1,9 +1,9 @@
 "use client";
 
-import createUser, { RegisterUserData } from "@/api/auth/createUser";
+import createUser from "@/api/auth/createUser";
 import apiUrl from "@/lib/mappings/apiUrl";
 import Status from "@/lib/types/Status";
-import { MutableRefObject, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 /**
  * Create account frontend
@@ -24,23 +24,30 @@ export default function CreateAccountFrontend() {
 			return;
 		}
 		
+		// Convert form to object
 		let userData: any = {};
 		const formData = new FormData(form.current);
 		formData.forEach((value, key) => userData[key] = value);
 		
+		// Create user
 		const data = await createUser(userData);
 		
-		console.log(`Data: `, data);
+		// Update status messages
+		if(data) {
+			setStatusMessages(data.messages);
+		}
 	}
 	
 	return (
-		<main className="contenedor">
+		<div>
 			{/* Show status messages */}
-			{statusMessages.map((message) => {
-				return (
-					<div className="error alerta">{message.message}</div>
-				);
-			})}
+			<div className="alertas">
+				{statusMessages.map((message) => {
+					return (
+						<div className="error alerta">{message.message}</div>
+					);
+				})}
+			</div>
 			
 			<form className="default-form" ref={form}>
 				<div className="campo">
@@ -69,6 +76,6 @@ export default function CreateAccountFrontend() {
 					<input type="submit" value="Create account" className="btn btn-azul" onClick={submitForm} />
 				</div>
 			</form>
-		</main>
+		</div>
 	);
 }
