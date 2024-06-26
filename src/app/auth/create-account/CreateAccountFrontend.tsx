@@ -4,6 +4,7 @@ import createUser from "@/api/auth/createUser";
 import apiUrl from "@/lib/mappings/apiUrl";
 import Status from "@/lib/types/Status";
 import { useEffect, useRef, useState } from "react";
+import { useInterval } from "react-interval-hook";
 
 /**
  * Create account frontend
@@ -12,10 +13,22 @@ export default function CreateAccountFrontend() {
 	const url = apiUrl();
 	const [statusMessages, setStatusMessages] = useState<Array<Status>>([]);
 	const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
-	const [deleteMessagesInterval, setDeleteMessagesInterval] = useState<NodeJS.Timeout | undefined>(undefined);
 	const form = useRef<any>(null);
-	const alerts = useRef<any>(null);
-	const parentElement = useRef<any>(null);
+	const { start, stop } = useInterval(
+		() => {
+			if(statusMessages.length > 0) {
+				setStatusMessages((messages) => {
+					return messages.slice(1);
+				});
+			}
+		},
+		2000, {
+			autoStart: false,
+            onFinish: () => {
+                console.log('Callback when timer is stopped');
+            },
+		}
+	);
 	
 	/**
 	 * Submit form
@@ -47,52 +60,26 @@ export default function CreateAccountFrontend() {
 	}
 	
 	useEffect(() => {
+		if(statusMessages.length === 0) {
+			stop();
+		}
+	}, [statusMessages]);
+	
+	useEffect(() => {
 		if(!formSubmitted) {
 			return;
 		}
 		
-		console.log(`Enabling clear interval`);
-		
-		const alertsElement = alerts.current;
-		if(!alertsElement) {
-			console.error("Couldn't get the alerts element!");
-			return;
-		}
-		
-		if(!alertsElement.children) {
-			console.error("Couldn't get the alerts children elements!");
-			return;
-		}
-		
-		// Delete a message every 2 seconds
-		const interval = setInterval(() => {
-			if(statusMessages.length > 0) {
-				setStatusMessages((messages) => {
-					return messages.slice(1);
-				});
-			} else {
-				setDeleteMessagesInterval((interval) => {
-					console.log(`Forcefully clear interval`);
-					clearInterval(interval);
-					return undefined;
-				});
-			}
-		}, 2000);
-		
-		setDeleteMessagesInterval(interval);
+		console.log(`Start clear interval`);
 		setFormSubmitted(false);
+		start();
 		
-        // //	Clearing the interval
-        // return () => {
-		// 	console.log(`Clear interval`);
-		// 	clearInterval(interval);
-		// };
 	}, [formSubmitted]);
 	
 	return (
-		<div ref={parentElement}>
+		<div>
 			{/* Show status messages */}
-			<div className="alertas" ref={alerts}>
+			<div className="alertas">
 				{statusMessages.map((message) => {
 					return (
 						<div className="error alerta" key={message.message}>{message.message}</div>
