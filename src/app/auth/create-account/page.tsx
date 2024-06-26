@@ -10,7 +10,6 @@ export default function CreateAccount() {
 			<Header
 				title="Create account at devJobs"
 				tagline="Fill the formulary to create your new account and start recruiting/posting for free!"
-				bar={true}
 			/>
 			
 			<main className="contenido-principal contenedor">

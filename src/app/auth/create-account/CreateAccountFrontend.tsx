@@ -1,16 +1,48 @@
 "use client";
 
+import createUser, { RegisterUserData } from "@/api/auth/createUser";
 import apiUrl from "@/lib/mappings/apiUrl";
+import Status from "@/lib/types/Status";
+import { MutableRefObject, useRef, useState } from "react";
 
 /**
  * Create account frontend
  */
 export default function CreateAccountFrontend() {
 	const url = apiUrl();
+	const [statusMessages, setStatusMessages] = useState<Array<Status>>([]);
+	const form = useRef<any>(null);
+	
+	/**
+	 * Submit form
+	 */
+	async function submitForm(e: any) {
+		e.preventDefault();
+		
+		if(!form.current) {
+			console.error("Couldn't get the form!");
+			return;
+		}
+		
+		let userData: any = {};
+		const formData = new FormData(form.current);
+		formData.forEach((value, key) => userData[key] = value);
+		
+		const data = await createUser(userData);
+		
+		console.log(`Data: `, data);
+	}
 	
 	return (
 		<main className="contenedor">
-			<form action={`${url}/auth/create-account`} method="POST" className="default-form">
+			{/* Show status messages */}
+			{statusMessages.map((message) => {
+				return (
+					<div className="error alerta">{message.message}</div>
+				);
+			})}
+			
+			<form className="default-form" ref={form}>
 				<div className="campo">
 					<label htmlFor="name">Name</label>
 					<input type="text" name="name" id="name" placeholder="Nombre" />
@@ -34,7 +66,7 @@ export default function CreateAccountFrontend() {
 				</div>
 				
 				<div className="campo">
-					<input type="submit" value="Create account" className="btn btn-azul" />
+					<input type="submit" value="Create account" className="btn btn-azul" onClick={submitForm} />
 				</div>
 			</form>
 		</main>
