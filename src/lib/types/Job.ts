@@ -13,6 +13,8 @@ export default interface Job {
 	contract?: string;
 	description?: string;
 	skills: Array<string>;
+	
+	author: MongooseTypes.ObjectId;
 	url: string;
 	
 	// This is an array of objects
