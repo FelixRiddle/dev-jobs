@@ -28,13 +28,12 @@ export default async function loginUser(userData: LoginUserData): Promise<Create
 		});
 		
 		const response = await instance.post(
-			"/auth/login",
+			"/rest/auth/login",
 			userData
 		);
 		
 		return response.data;
 	} catch(err: any) {
-		
 		// If the error has response, then it's still a valid status response
 		if(err.response) {
 			const data = err.response.data;
