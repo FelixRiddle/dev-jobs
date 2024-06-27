@@ -45,7 +45,7 @@ export default function Page() {
     return (
         <div className="contenedor">
             <form
-				action={`${url}/job/create`}
+				action={`${url}/rest/job/create`}
 				method="POST"
 				className="default-form"
 			>

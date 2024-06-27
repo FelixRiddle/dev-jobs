@@ -58,7 +58,7 @@ export default function EditJobFrontend({
 	return (
         <div className="contenedor">
 			<form
-				action={`${url}/job/edit`}
+				action={`${url}/rest/job/edit`}
 				method="POST"
 				className="default-form"
 			>

@@ -19,7 +19,7 @@ export async function getAllJobs() {
 			},
 		});
 		
-		const response = await instance.get("/job/get_all");
+		const response = await instance.get("/rest/job/get_all");
 		
 		// Data
 		const data = response.data;

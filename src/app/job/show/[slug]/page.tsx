@@ -22,7 +22,7 @@ export async function getJobDataByUrl(jobUrl: string): Promise<Job | undefined> 
 			},
 		});
 		
-		const response: any = await instance.get(`/job/get/url/${jobUrl}`);
+		const response: any = await instance.get(`/rest/job/get/url/${jobUrl}`);
 		const data = response.data;
 		
 		if(data && data.job) {
