@@ -1,19 +1,11 @@
-import apiUrl from "@/lib/mappings/apiUrl";
-import axios from "axios";
+import createAxiosInstance from "@/lib/createAxiosInstance";
 
 /**
  * Get all jobs
  */
 export default async function getAllJobs() {
 	try {
-		const url = apiUrl();
-		
-		const instance = axios.create({
-			baseURL: url,
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
+		const instance = createAxiosInstance();
 		
 		const response = await instance.get("/rest/job/get_all");
 		

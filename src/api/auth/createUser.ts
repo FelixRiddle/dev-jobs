@@ -1,5 +1,6 @@
 "use server";
 
+import createAxiosInstance from "@/lib/createAxiosInstance";
 import apiUrl from "@/lib/mappings/apiUrl";
 import Status from "@/lib/types/Status";
 import axios from "axios";
@@ -20,14 +21,7 @@ export interface RegisterUserData {
  */
 export default async function createUser(userData: RegisterUserData): Promise<CreateUserResponse | undefined> {
 	try {
-		const url = apiUrl();
-		
-		const instance = axios.create({
-			baseURL: url,
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
+		const instance = createAxiosInstance();
 		
 		const response = await instance.post(
 			"/auth/create-account",

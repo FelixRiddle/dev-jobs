@@ -1,9 +1,8 @@
 "use server";
 
-import apiUrl from "@/lib/mappings/apiUrl";
+import createAxiosInstance from "@/lib/createAxiosInstance";
 import Status from "@/lib/types/Status";
 import User from "@/lib/types/User";
-import axios from "axios";
 
 interface UserProfileResponse {
 	user?: User;
@@ -15,14 +14,7 @@ interface UserProfileResponse {
  */
 export default async function getUserProfile(): Promise<UserProfileResponse | undefined> {
 	try {
-		const url = apiUrl();
-		
-		const instance = axios.create({
-			baseURL: url,
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
+		const instance = createAxiosInstance();
 		
 		const response = await instance.get(
 			"/rest/user/profile"
