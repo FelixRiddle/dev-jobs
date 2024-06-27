@@ -22,6 +22,7 @@ export default function useStatusMessages() {
 			autoStart: false,
             onFinish: () => {
                 // console.log('Callback when timer is stopped');
+				console.log(`Status messages cleared: `, statusMessages);
             },
 		}
 	);

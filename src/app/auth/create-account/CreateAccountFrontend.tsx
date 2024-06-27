@@ -1,47 +1,19 @@
 "use client";
 
 import createUser from "@/api/auth/createUser";
-import useStatusMessages from "@/lib/hooks/useStatusMessages";
-import apiUrl from "@/lib/mappings/apiUrl";
-import { useRef } from "react";
+import useForm from "@/lib/hooks/form/useForm";
 
 /**
  * Create account frontend
  */
 export default function CreateAccountFrontend() {
-	const url = apiUrl();
-	const form = useRef<any>(null);
 	const {
+		formRef,
 		statusMessages,
-		setStatusMessages,
-		setFormSubmitted
-	} = useStatusMessages();
-	
-	/**
-	 * Submit form
-	 */
-	async function submitForm(e: any) {
-		e.preventDefault();
-		
-		if(!form.current) {
-			console.error("Couldn't get the form!");
-			return;
-		}
-		
-		// Convert form to object
-		let userData: any = {};
-		const formData = new FormData(form.current);
-		formData.forEach((value, key) => userData[key] = value);
-		
-		// Create user
-		const data = await createUser(userData);
-		
-		// Update status messages
-		if(data) {
-			setStatusMessages(data.messages);
-			setFormSubmitted(true);
-		}
-	}
+        submitForm
+	} = useForm({
+		callback: createUser,
+	});
 	
 	return (
 		<div>
@@ -54,7 +26,7 @@ export default function CreateAccountFrontend() {
 				})}
 			</div>
 			
-			<form className="default-form" ref={form}>
+			<form className="default-form" ref={formRef}>
 				<div className="campo">
 					<label htmlFor="name">Name</label>
 					<input type="text" name="name" id="name" placeholder="Nombre" />
@@ -74,7 +46,7 @@ export default function CreateAccountFrontend() {
 				
 				{/* Actions */}
 				<div className="campo acciones">
-					<a href={`${url}/auth/login`}>Go back to log in</a>
+					<a href={`/auth/login`}>Go back to log in</a>
 				</div>
 				
 				<div className="campo">

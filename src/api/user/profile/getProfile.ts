@@ -2,23 +2,18 @@
 
 import apiUrl from "@/lib/mappings/apiUrl";
 import Status from "@/lib/types/Status";
+import User from "@/lib/types/User";
 import axios from "axios";
 
-export interface CreateUserResponse {
+interface UserProfileResponse {
+	user?: User;
 	messages: Array<Status>;
 }
 
-export interface RegisterUserData {
-	name: string;
-	email: string;
-	password: string;
-	confirmPassword: string;
-}
-
 /**
- * Create user
+ * Get user profile
  */
-export default async function createUser(userData: RegisterUserData): Promise<CreateUserResponse | undefined> {
+export default async function getUserProfile(): Promise<UserProfileResponse | undefined> {
 	try {
 		const url = apiUrl();
 		
@@ -29,9 +24,8 @@ export default async function createUser(userData: RegisterUserData): Promise<Cr
 			}
 		});
 		
-		const response = await instance.post(
-			"/auth/create-account",
-			userData
+		const response = await instance.get(
+			"/rest/user/profile"
 		);
 		
 		return response.data;

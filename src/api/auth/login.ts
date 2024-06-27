@@ -8,17 +8,15 @@ export interface CreateUserResponse {
 	messages: Array<Status>;
 }
 
-export interface RegisterUserData {
-	name: string;
+export interface LoginUserData {
 	email: string;
 	password: string;
-	confirmPassword: string;
 }
 
 /**
  * Create user
  */
-export default async function createUser(userData: RegisterUserData): Promise<CreateUserResponse | undefined> {
+export default async function loginUser(userData: LoginUserData): Promise<CreateUserResponse | undefined> {
 	try {
 		const url = apiUrl();
 		
@@ -30,7 +28,7 @@ export default async function createUser(userData: RegisterUserData): Promise<Cr
 		});
 		
 		const response = await instance.post(
-			"/auth/create-account",
+			"/auth/login",
 			userData
 		);
 		

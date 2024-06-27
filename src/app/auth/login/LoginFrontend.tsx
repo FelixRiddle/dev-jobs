@@ -1,16 +1,33 @@
 "use client";
 
-import apiUrl from "@/lib/mappings/apiUrl"
+import loginUser from "@/api/auth/login";
+import useForm from "@/lib/hooks/form/useForm";
 
 /**
  * Login frontend
  */
 export default function LoginFrontend() {
-	const url = apiUrl();
+	// It can still be abstracted more, if we put the status messages into a separate component
+	const {
+		formRef,
+		statusMessages,
+        submitForm
+	} = useForm({
+		callback: loginUser,
+	});
 	
 	return (
 		<div>
-			<form action="/login" method="POST" className="default-form">
+			{/* Show status messages */}
+			<div className="alertas">
+				{statusMessages && statusMessages.map((message) => {
+					return (
+						<div className="error alerta" key={message.message}>{message.message}</div>
+					);
+				})}
+			</div>
+			
+			<form className="default-form" ref={formRef}>
 				<div className="campo">
 					<label htmlFor="email">E-Mail</label>
 					<input type="email" name="email" id="email" placeholder="E-Mail" required />
@@ -20,12 +37,12 @@ export default function LoginFrontend() {
 					<input type="password" name="password" id="password" placeholder="Password" required />
 				</div>
 				
-				<div className="campo actions">
-					<a href={`${url}/auth/create-account`}>Create an account</a>
-					<a href={`${url}/auth/reset-password`}>Forgot password</a>
+				<div className="campo acciones">
+					<a href={`/auth/create-account`}>Create an account</a>
+					<a href={`/auth/reset-password`}>Forgot password</a>
 				</div>
 				<div className="campo">
-					<input type="submit" value="Login" className="btn btn-azul" />
+					<input type="submit" value="Login" className="btn btn-azul" onClick={submitForm} />
 				</div>
 			</form>
 		</div>
