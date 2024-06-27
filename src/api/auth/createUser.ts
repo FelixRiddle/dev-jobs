@@ -29,9 +29,10 @@ export default async function createUser(userData: RegisterUserData): Promise<Cr
 			}
 		});
 		
-		const response = await instance.post("/auth/create-account", {
-			body: userData
-		});
+		const response = await instance.post(
+			"/auth/create-account",
+			userData
+		);
 		
 		return response.data;
 	} catch(err: any) {

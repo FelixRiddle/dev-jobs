@@ -1,42 +1,27 @@
 "use client";
 
 import createUser from "@/api/auth/createUser";
+import useStatusMessages from "@/lib/hooks/useStatusMessages";
 import apiUrl from "@/lib/mappings/apiUrl";
-import Status from "@/lib/types/Status";
-import { useEffect, useRef, useState } from "react";
-import { useInterval } from "react-interval-hook";
+import { useRef } from "react";
 
 /**
  * Create account frontend
  */
 export default function CreateAccountFrontend() {
 	const url = apiUrl();
-	const [statusMessages, setStatusMessages] = useState<Array<Status>>([]);
-	const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
 	const form = useRef<any>(null);
-	const { start, stop } = useInterval(
-		() => {
-			if(statusMessages.length > 0) {
-				setStatusMessages((messages) => {
-					return messages.slice(1);
-				});
-			}
-		},
-		2000, {
-			autoStart: false,
-            onFinish: () => {
-                console.log('Callback when timer is stopped');
-            },
-		}
-	);
+	const {
+		statusMessages,
+		setStatusMessages,
+		setFormSubmitted
+	} = useStatusMessages();
 	
 	/**
 	 * Submit form
 	 */
 	async function submitForm(e: any) {
 		e.preventDefault();
-		
-		console.log(`Submit form`);
 		
 		if(!form.current) {
 			console.error("Couldn't get the form!");
@@ -54,27 +39,9 @@ export default function CreateAccountFrontend() {
 		// Update status messages
 		if(data) {
 			setStatusMessages(data.messages);
-			console.log(`Set messages: `, data);
 			setFormSubmitted(true);
 		}
 	}
-	
-	useEffect(() => {
-		if(statusMessages.length === 0) {
-			stop();
-		}
-	}, [statusMessages]);
-	
-	useEffect(() => {
-		if(!formSubmitted) {
-			return;
-		}
-		
-		console.log(`Start clear interval`);
-		setFormSubmitted(false);
-		start();
-		
-	}, [formSubmitted]);
 	
 	return (
 		<div>
