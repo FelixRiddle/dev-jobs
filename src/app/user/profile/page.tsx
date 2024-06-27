@@ -11,14 +11,8 @@ import { redirect } from "next/navigation";
 export default async function Profile() {
 	const response = await getUserProfile();
 	
-	console.log(`Get user profile response: `, response);
 	if(!response || !response.user) {
-		// redirect("/auth/login");
-		return (
-			<div>
-				Unauthenticated
-			</div>
-		);
+		redirect("/auth/login");
 	}
 	
 	const user = response.user;
