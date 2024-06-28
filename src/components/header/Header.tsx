@@ -1,12 +1,15 @@
-import User from "@/lib/types/User";
+"use server";
+
+import logout from "@/api/user/logout";
 import Link from "next/link";
+import UserNavbar from "./UserNavbar";
 
 /**
  * Header
  * 
  * @returns 
  */
-export default function Header({
+export default async function Header({
 	title,
 	tagline,
 	bar,
@@ -19,6 +22,8 @@ export default function Header({
 	button?: boolean;
 	user?: any;
 }) {
+	console.log(`Logout: `, logout);
+	
 	return (
 		<div>
 			{/* Top bar */}
@@ -38,11 +43,10 @@ export default function Header({
 				)}
 				
 				{user && (
-					<div className="cerrar-session">
-						<p className={"close-session-element"} style={{ display: "inline" }}>Hello {user.name}!</p>
-						<a href="/user/admin" className={"close-session-element"} style={{ display: "inline" }}>Admin panel</a>
-						<a href="/user/logout" className={"close-session-element"} style={{ display: "inline" }}>Logout</a>
-					</div>
+					<UserNavbar
+						user={user}
+						logout={logout}
+					/>
 				)}
             </div>
             

@@ -15,7 +15,7 @@ export default async function Profile() {
 			<Header
 				title="Edit user profile"
 				tagline="Update your profile"
-				bar={true}
+				user={user}
 			/>
 			
 			<main className="contenido-principal contenedor">

@@ -42,8 +42,6 @@ export default function useForm({
 		
 		// Update status messages
 		if(data) {
-			console.log(`Response: `, data);
-			
 			const messages = data.messages;
 			if(messages && Array.isArray(messages)) {
 				setStatusMessages(messages);
