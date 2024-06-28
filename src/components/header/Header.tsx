@@ -26,29 +26,37 @@ export default async function Header({
 	
 	return (
 		<div>
+			{/* Styles */}
+			<link rel="stylesheet" href="/css/search.css" />
+			<link rel="stylesheet" href="/css/user-navbar.css" />
+			
 			{/* Top bar */}
-            <div className="nombre-sitio contenedor">
-				<h1>
+            <div className="contenedor header">
+				{/* Site title */}
+				<h1 className="website-name">
 					<Link href="/home">devJobs</Link>
 				</h1>
-                
+				
+				{/* User navbar */}
+				<UserNavbar
+					user={user}
+					logout={logout}
+				/>
+				
 				{/* Search */}
 				{bar && (
-					<div className="buscador">
-						<form action="#">
+					<div className="search">
+						<form action="#" className="search-form">
 							<input type="text" className="buscar" />
 							<input type="submit" value="Buscar" />
 						</form>
 					</div>
 				)}
-				
-				{user && (
-					<UserNavbar
-						user={user}
-						logout={logout}
-					/>
-				)}
             </div>
+			
+			{/* User navigation */}
+			{/* <div className="contenedor">
+			</div> */}
             
             {/* Page information */}
             <div>

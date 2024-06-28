@@ -2,7 +2,7 @@
 
 import Header from "@/components/header/Header";
 import ProfileFrontend from "./ProfileFrontend";
-import { authenticate } from "../admin/page";
+import authenticate from "@/lib/auth/authenticate";
 
 /**
  * Profile

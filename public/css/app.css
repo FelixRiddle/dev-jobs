@@ -29,6 +29,7 @@ h2 {
 h3 {
     font-size: 2.8rem;
 }
+
 .contenedor {
     max-width: 1200px;
     margin: 0 auto;
@@ -87,67 +88,6 @@ h3 {
     margin: 2rem 0 3rem 0;
 }
 
-
-.site-header {
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    margin-bottom: 5rem;
-}
-
-.nombre-sitio {
-    display: flex;
-    justify-content: space-between;
-}
-.nombre-sitio a {
-    color: white;
-    text-decoration: none;
-}
-.buscador {
-    padding-top: 1rem;
-    display: flex;
-    justify-content: flex-end;
-    flex: 1;
-}
-.buscador form {
-    flex:1;
-    position: relative;
-}
-@media (min-width: 768px) {
-    .buscador form {
-        flex: 0 0 40%;
-    }
-}
-.buscador input[type="text"] {
-    background-color: rgba(255,255,255,.1);
-    width: 100%;
-    border: none;
-    padding: .5rem 4rem .5rem 2rem;
-    height: 5rem;
-    border-radius: 1rem;
-    color: white;
-    font-size: 1.2rem;
-}
-.buscador input[type="submit"] {
-    display: block;
-    text-indent: -9999px;
-    height: 30px;
-    width:30px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background-image: url(../img/magnifyingGlass.png);
-    background-color: transparent;
-    border: none;
-    background-size: 20px;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-.buscador input[type="submit"]:hover {
-    cursor: pointer;
-}
 
 @media (min-width:768px) {
     .candidato,
@@ -254,9 +194,9 @@ h3 {
     color: white;
     font-size: 1.8rem;
 }
-.enviar-datos form {
+/* .enviar-datos form {
 
-}
+} */
 
 /** Iniciar Sesión **/
 .default-form {
@@ -390,7 +330,6 @@ trix-toolbar .trix-button--icon-strike {
 }
 
 /** Admin **/
-
 p.candidatos {
     font-weight: 400;
     color: white;
@@ -407,20 +346,6 @@ p.candidatos {
     margin-right: 1rem;
 }
 
-.close-session-element {
-    margin:  0 2rem 0 0 ;
-    color: #888;
-}
-.cerrar-sesion {
-    margin-top: 2rem;
-    color: white;
-    display: flex;
-	flex-direction: column;
-}
-
-.cerrar-sesion img {
-        width: 80px;
-}
 .botones {
     display: flex;
     justify-content: flex-start;

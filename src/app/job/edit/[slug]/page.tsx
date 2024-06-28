@@ -3,7 +3,7 @@ import { getJobDataByUrl } from "../../show/[slug]/page";
 import Header from "@/components/header/Header";
 import EditJobFrontend from "./EditJobFrontend";
 import ImportTrix from "../../create/ImportTrix";
-import { authenticate } from "@/app/user/admin/page";
+import authenticate from "@/lib/auth/authenticate";
 
 /**
  * Job 

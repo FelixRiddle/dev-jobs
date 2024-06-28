@@ -1,0 +1,47 @@
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+	
+	/* For debugging */
+	/* border: red 1px solid; */
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+}
+
+.website-name {
+	padding-right: 10%;
+}
+
+.site-header {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 5rem;
+}
+
+/* User navbar */
+.user-navbar-element {
+	padding-left: 1rem;
+    color: #888;
+	
+	/* border: red 1px solid; */
+}
+
+.user-navbar {
+	padding-top: 3rem;
+	padding-bottom: 2rem;
+    color: white;
+    display: flex;
+	
+	/* border: yellow 1px solid; */
+}
+
+.user-navbar img {
+	width: 80px;
+}

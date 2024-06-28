@@ -1,6 +1,6 @@
 import Header from "@/components/header/Header";
 import ImportTrix from "./ImportTrix";
-import { authenticate } from "@/app/user/admin/page";
+import authenticate from "@/lib/auth/authenticate";
 
 /**
  * Create layout
