@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import useStatusMessages from "../useStatusMessages";
 
 /**
@@ -11,10 +11,13 @@ import useStatusMessages from "../useStatusMessages";
  * Also uses status messages to display information.
  */
 export default function useForm({
-	callback
+	callback,
 }: {
 	callback: (formObjectData: any) => any;
 }) {
+	const [externalState, setExternalState] = useState<{
+        [key: string]: any;
+    }>({})
 	const form = useRef<any>(null);
 	const {
 		statusMessages,
@@ -33,7 +36,10 @@ export default function useForm({
 		}
 		
 		// Convert form to object
-		let formObjectData: any = {};
+		let formObjectData: any = {
+			// Insert external state first
+			...externalState,
+		};
 		const formData = new FormData(form.current);
 		formData.forEach((value, key) => formObjectData[key] = value);
 		
@@ -55,6 +61,8 @@ export default function useForm({
 		formRef: form,
 		statusMessages,
 		submitForm,
+		externalState,
+		setExternalState,
 	};
 }
 

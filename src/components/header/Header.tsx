@@ -3,6 +3,7 @@
 import logout from "@/api/user/logout";
 import Link from "next/link";
 import UserNavbar from "./UserNavbar";
+import apiUrl from "@/lib/mappings/apiUrl";
 
 /**
  * Header
@@ -22,11 +23,13 @@ export default async function Header({
 	button?: boolean;
 	user?: any;
 }) {
+	const url = apiUrl();
+	
 	return (
 		<div>
 			{/* Styles */}
-			<link rel="stylesheet" href="/css/search.css" />
-			<link rel="stylesheet" href="/css/user-navbar.css" />
+			<link rel="stylesheet" href={`/css/search.css`} />
+			<link rel="stylesheet" href={`/css/user-navbar.css`} />
 			
 			{/* Top bar */}
             <div className="contenedor header">

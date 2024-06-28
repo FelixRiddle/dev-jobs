@@ -1,16 +1,70 @@
 "use client";
 
-import apiUrl from "@/lib/mappings/apiUrl";
+import deleteJob from "@/api/job/delete";
 import Job from "@/lib/types/Job";
+import mongoose from "mongoose";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 /**
  * Admin frontend
  */
 export default function AdminFrontend({
-	jobs
+	jobs: userJobs = []
 }: {
 	jobs: Job[]
 }) {
+	const [jobs, setJobs] = useState(userJobs);
+	
+	/**
+	 * Called when delete job is clicked
+	 */
+	async function onDeleteJob(event: any, id: mongoose.Types.ObjectId, index: number) {
+		// Delete via axios
+		withReactContent(Swal).fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+			cancelButtonText: "Don't delete",
+		}).then(async (result) => {
+			if (result.isConfirmed) {
+				// Send request
+				const response = await deleteJob(id.toString());
+				console.log(`Response: `, response);
+				
+				const status = response.status;
+				
+				// Get message info
+				const data = response.data;
+				const firstMessage = data.messages[0];
+				const message = firstMessage.message;
+				if(status === 200) {
+					withReactContent(Swal).fire({
+						title: "Deleted!",
+						text: "The job post has been deleted.",
+						icon: "success"
+					});
+					
+					// Remove job by index
+					setJobs((jobs) => {
+						return jobs.filter((_, i) => i !== index);
+					});
+				} else {
+					withReactContent(Swal).fire({
+						title: "Error",
+						text: `The job post couldn't be delete. Reason: ${message}`,
+						icon: "error"
+					});
+				}
+			}
+		});
+	}
+	
 	return (
 		<main className="lista-vacantes">
 			<h2>Navigation</h2>
@@ -21,11 +75,11 @@ export default function AdminFrontend({
 			
 			<h2>Your job posts</h2>
 			
-			<div>
+			<div className={"panel-administracion"}>
 				{jobs.length > 0 && (
-					jobs.map((job) => {
+					jobs.map((job, index) => {
 						return (
-							<div key={job.url} className="vacante panel-administracion">
+							<div key={job.url} className="vacante">
 								<div className="caja">
 									<h3>
 										{job.company}
@@ -41,7 +95,7 @@ export default function AdminFrontend({
 									<a href={`/job/edit/${job.url}`} className="btn btn-verde">Edit</a>
 								</div>
 								<div className="centrar-vertical caja">
-									<a href="#" data-delete={job._id} className="btn btn-rojo">Delete</a>
+									<a href="#" className="btn btn-rojo" onClick={(event) => onDeleteJob(event, job._id, index)}>Delete</a>
 								</div>
 							</div>
 						);

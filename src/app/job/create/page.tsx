@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
+
+import createJob from "@/api/job/create";
+import useForm from "@/lib/hooks/form/useForm";
 import { allSkills } from "@/lib/job/jobSkills";
-import apiUrl from "@/lib/mappings/apiUrl";
-import { MutableRefObject, useRef, useState } from "react";
 
 /**
  * Create
@@ -10,9 +12,15 @@ import { MutableRefObject, useRef, useState } from "react";
  * @returns 
  */
 export default function Page() {
-	const url = apiUrl();
 	const [skills, setSkills] = useState(new Set());
-	const skillsElement: MutableRefObject<null | HTMLInputElement> = useRef(null);
+	const {
+		formRef,
+		statusMessages,
+		submitForm,
+		setExternalState,
+	} = useForm({
+		callback: createJob,
+	});
 	
 	/**
 	 * Called on skill click
@@ -36,17 +44,23 @@ export default function Page() {
 			e.target.classList.add("activo");
 		}
 		
-		if(skillsElement.current) {
-			const skillsArray: Array<string> = [...skills] as Array<string>;
-			skillsElement.current.value = skillsArray.join(",");
-		}
+		setExternalState({
+			skills: [...skills],
+		});
 	}
 	
     return (
         <div className="contenedor">
+			<div className="alertas">
+				{statusMessages && statusMessages.map((message) => {
+					return (
+						<div className="error alerta" key={message.message}>{message.message}</div>
+					);
+				})}
+			</div>
+			
             <form
-				action={`${url}/rest/job/create`}
-				method="POST"
+				ref={formRef}
 				className="default-form"
 			>
                 <h3>
@@ -109,8 +123,7 @@ export default function Page() {
 				</ul>
 				
 				<div className="campo centrar-horizontal">
-					<input type="hidden" name="skills" id="skills" ref={skillsElement} />
-					<input type="submit" value="Publish" className="btn btn-azul"/>
+					<input type="submit" value="Publish" className="btn btn-azul" onClick={submitForm} />
 				</div>
             </form>
         </div>
