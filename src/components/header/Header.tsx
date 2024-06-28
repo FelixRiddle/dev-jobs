@@ -1,11 +1,5 @@
+import User from "@/lib/types/User";
 import Link from "next/link";
-
-interface HeaderArgs {
-	title?: string;
-	tagline?: string;
-	bar?: boolean;
-	button?: boolean;
-}
 
 /**
  * Header
@@ -17,7 +11,14 @@ export default function Header({
 	tagline,
 	bar,
 	button,
-}: HeaderArgs) {
+	user
+}: {
+	title?: string;
+	tagline?: string;
+	bar?: boolean;
+	button?: boolean;
+	user?: any;
+}) {
 	return (
 		<div>
 			{/* Top bar */}
@@ -35,6 +36,14 @@ export default function Header({
 						</form>
 					</div>
 				)}
+				
+				{user && (
+					<div className="cerrar-session">
+						<p className={"close-session-element"} style={{ display: "inline" }}>Hello {user.name}!</p>
+						<a href="/user/admin" className={"close-session-element"} style={{ display: "inline" }}>Admin panel</a>
+						<a href="/user/logout" className={"close-session-element"} style={{ display: "inline" }}>Logout</a>
+					</div>
+				)}
             </div>
             
             {/* Page information */}
@@ -43,7 +52,7 @@ export default function Header({
                     <h2>{title}</h2>
                     
 					{tagline && (
-                        <p className="tagline">
+                    	<p className="tagline">
                             {tagline}
                         </p>
                     )}

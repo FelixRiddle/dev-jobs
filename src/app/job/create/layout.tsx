@@ -10,8 +10,6 @@ export default function Layout({
 }: {
 	children: React.ReactNode,
 }) {
-	const url = apiUrl();
-	
 	return (
         <div>
 			<ImportTrix />
