@@ -7,6 +7,7 @@ import Header from "@/components/header/Header";
 import apiUrl from "@/lib/mappings/apiUrl";
 import JobFrontend from "./JobFrontend";
 import Job from "@/lib/types/Job";
+import optionalUser from "@/lib/auth/optionalUser";
 
 /**
  * Fetch job data
@@ -47,6 +48,7 @@ export default async function Page({
 		slug: string;
 	}
 }) {
+	const user = await optionalUser();
 	const job = await getJobDataByUrl(params.slug);
 	
 	if(!job) {
@@ -58,6 +60,7 @@ export default async function Page({
 			<Header
 				title={job.title}
 				tagline={job.company}
+				user={user}
 				bar={true}
 			/>
 			

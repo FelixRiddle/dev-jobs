@@ -41,7 +41,7 @@ export default function JobFrontend({
 					<div className="vacante-descripcion" dangerouslySetInnerHTML={{ __html: job.description ?? "", }}>
 					</div>
 					
-					<Link href={`${url}/job/edit/${job.url}`} className="btn btn-azul editar-btn">Edit job</Link>
+					<Link href={`/job/edit/${job.url}`} className="btn btn-azul editar-btn">Edit job</Link>
 				</div>
 				<aside className="sidebar">
 					<h2>Required knowledge</h2>

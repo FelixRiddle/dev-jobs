@@ -12,7 +12,7 @@ import UserNavbar from "./UserNavbar";
 export default async function Header({
 	title,
 	tagline,
-	bar,
+	bar = true,
 	button,
 	user
 }: {
@@ -22,8 +22,6 @@ export default async function Header({
 	button?: boolean;
 	user?: any;
 }) {
-	console.log(`Logout: `, logout);
-	
 	return (
 		<div>
 			{/* Styles */}
@@ -33,9 +31,24 @@ export default async function Header({
 			{/* Top bar */}
             <div className="contenedor header">
 				{/* Site title */}
-				<h1 className="website-name">
-					<Link href="/home">devJobs</Link>
-				</h1>
+				<div className={"website-info"}>
+					<h1 className="website-name">
+						<Link href="/home">devJobs</Link>
+					</h1>
+					
+					{/* I have to add this here, because I really confused this frontend with
+					the handlebars one and ended up wasting like 20 minutes because of that
+					😡😡😡😡😡😂😂😂😂😂
+					*/}
+					<div className={"website-powered-by"}>
+						<p>
+							Powered by 
+						</p>
+						<p className="framework-name">
+							NextJS
+						</p>
+					</div>
+				</div>
 				
 				{/* User navbar */}
 				<UserNavbar

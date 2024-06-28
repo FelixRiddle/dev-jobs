@@ -16,7 +16,7 @@ export default function UserNavbar({
 		<div>
 			{user && (
 				<div className="user-navbar">
-					<a href="#" className={"user-navbar-element"} style={{ display: "inline" }}>Hello {user.name}!</a>
+					<a href="/user/profile" className={"user-navbar-element"} style={{ display: "inline" }}>Hello {user.name}!</a>
 					<a href="/user/admin" className={"user-navbar-element"} style={{ display: "inline" }}>Admin panel</a>
 					<a
 						href="#"

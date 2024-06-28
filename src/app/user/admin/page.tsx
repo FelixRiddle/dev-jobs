@@ -16,6 +16,7 @@ export default async function Admin() {
 				title="Administration panel"
 				tagline="Create and administrate your job positions from here"
 				user={user}
+				bar={true}
 			/>
 			
 			<div className="contenido-principal contenedor">
