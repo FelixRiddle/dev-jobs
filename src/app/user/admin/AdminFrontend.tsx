@@ -34,16 +34,12 @@ export default function AdminFrontend({
 		}).then(async (result) => {
 			if (result.isConfirmed) {
 				// Send request
-				const response = await deleteJob(id.toString());
-				console.log(`Response: `, response);
-				
-				const status = response.status;
+				const data = await deleteJob(id.toString());
 				
 				// Get message info
-				const data = response.data;
 				const firstMessage = data.messages[0];
 				const message = firstMessage.message;
-				if(status === 200) {
+				if(!firstMessage.error) {
 					withReactContent(Swal).fire({
 						title: "Deleted!",
 						text: "The job post has been deleted.",
