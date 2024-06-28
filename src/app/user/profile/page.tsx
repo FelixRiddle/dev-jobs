@@ -2,20 +2,13 @@
 
 import Header from "@/components/header/Header";
 import ProfileFrontend from "./ProfileFrontend";
-import getUserProfile from "@/api/user/profile/getProfile";
-import { redirect } from "next/navigation";
+import { authenticate } from "../admin/page";
 
 /**
  * Profile
  */
 export default async function Profile() {
-	const response = await getUserProfile();
-	
-	if(!response || !response.user) {
-		redirect("/auth/login");
-	}
-	
-	const user = response.user;
+	const user = await authenticate();
 	
 	return (
 		<div>

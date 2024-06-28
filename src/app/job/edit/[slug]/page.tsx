@@ -3,6 +3,7 @@ import { getJobDataByUrl } from "../../show/[slug]/page";
 import Header from "@/components/header/Header";
 import EditJobFrontend from "./EditJobFrontend";
 import ImportTrix from "../../create/ImportTrix";
+import { authenticate } from "@/app/user/admin/page";
 
 /**
  * Job 
@@ -14,6 +15,7 @@ export default async function Page({
 		slug: string;
 	}
 }) {
+	const user = await authenticate();
 	const job = await getJobDataByUrl(params.slug);
 	
 	if(!job) {
@@ -27,7 +29,7 @@ export default async function Page({
 			<Header
 				title={job.title}
 				tagline={job.company}
-				bar={true}
+				user={user}
 			/>
 			
 			<main className="contenido-principal contenedor">

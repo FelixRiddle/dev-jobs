@@ -5,11 +5,12 @@ import getUserProfile from "@/api/user/profile/getProfile";
 import { redirect } from "next/navigation";
 
 /**
- * Admin
+ * Authenticate
+ * 
+ * Try to get the user and if it can't then redirect
  */
-export default async function Admin() {
+export async function authenticate() {
 	const userResponse = await getUserProfile();
-    const jobs = await getAllJobs();
 	
 	if(!userResponse) {
 		redirect("/auth/login");
@@ -20,6 +21,16 @@ export default async function Admin() {
 	if(!user) {
 		redirect("/auth/login");
 	}
+	
+	return user;
+}
+
+/**
+ * Admin
+ */
+export default async function Admin() {
+	const user = await authenticate();
+    const jobs = await getAllJobs();
 	
 	return (
         <div>
