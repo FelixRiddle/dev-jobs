@@ -58,7 +58,33 @@ export default function JobFrontend({
 			</div>
 			
 			<div className="contenedor datos-reclutador">
-				<div className="enviar-datos"></div>
+				<div className="enviar-datos">
+					<h2>Contact Employer</h2>
+					<p>Fill the formulary, upload your resume and we will contact you soon</p>
+					
+					<form
+						method="POST"
+						action={`${url}/job/${job.url}`}
+						className="default-form"
+						encType="multipart/form-data"
+					>
+						<div className="campo">
+							<label htmlFor="name">Name</label>
+							<input type="text" name="name" id="name" placeholder="Name" />
+						</div>
+						<div className="campo">
+							<label htmlFor="email">E-Mail</label>
+							<input type="email" name="email" id="email" placeholder="E-Mail" />
+						</div>
+						<div className="campo">
+							<label htmlFor="resume">Upload resume(PDF)</label>
+							<input type="file" name="resume" id="resume" placeholder="Resume" />
+						</div>
+						<div className="campo">
+							<input type="submit" className="btn btn-verde" value="Send" />
+						</div>
+					</form>
+				</div>
 				
 				<div className="info-reclutador">
 					<h2>Employer information</h2>
