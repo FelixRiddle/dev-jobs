@@ -1,8 +1,10 @@
 "use client";
 
+import applyJob from "@/api/job/apply";
 import apiUrl from "@/lib/mappings/apiUrl";
 import { PopulatedJob } from "@/lib/types/Job";
 import Link from "next/link";
+import { useRef } from "react";
 
 /**
  * Job frontend
@@ -13,6 +15,18 @@ export default function JobFrontend({
 	job: PopulatedJob,
 }) {
 	const url = apiUrl();
+	const form = useRef(null);
+	
+	async function submitForm(e: any) {
+		e.preventDefault();
+		
+		if(!form.current) {
+			return;
+		}
+		
+		const formData = new FormData(form.current);
+		const response = await applyJob(formData, job.url);
+	}
 	
 	return (
 		<div>
@@ -64,9 +78,9 @@ export default function JobFrontend({
 					
 					<form
 						method="POST"
-						action={`${url}/job/${job.url}`}
 						className="default-form"
 						encType="multipart/form-data"
+						ref={form}
 					>
 						<div className="campo">
 							<label htmlFor="name">Name</label>
@@ -80,8 +94,14 @@ export default function JobFrontend({
 							<label htmlFor="resume">Upload resume(PDF)</label>
 							<input type="file" name="resume" id="resume" placeholder="Resume" />
 						</div>
+						
 						<div className="campo">
-							<input type="submit" className="btn btn-verde" value="Send" />
+							<input
+								type="submit"
+								className="btn btn-verde"
+								value="Send"
+								onClick={submitForm}
+							/>
 						</div>
 					</form>
 				</div>
