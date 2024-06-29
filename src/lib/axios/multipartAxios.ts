@@ -22,6 +22,7 @@ export function multipartAxiosInstance() {
 	const instance = axios.create({
 		withCredentials: true,
 		baseURL: url,
+		timeout: 
 		headers
 	});
 	
