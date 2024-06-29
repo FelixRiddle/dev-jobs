@@ -83,6 +83,9 @@ export default function AdminFrontend({
 									<p className="puesto">
 										{job.title}
 									</p>
+									<p className="candidatos">
+										{job.candidates.length} Candidate(s)
+									</p>
 								</div>
 								<div className="centrar-vertical caja">
 									<a href={`/candidates/${job._id}`} className="btn btn-amarillo">Candidates</a>
