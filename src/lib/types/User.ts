@@ -6,8 +6,10 @@ import { Types as MongooseTypes } from "mongoose";
 export default interface User {
 	_id: MongooseTypes.ObjectId;
 	
+	image: string;
 	email: string;
 	name: string;
+	
 	// Not gonna need password for anything
 	// password: string;
 	__v: number;
