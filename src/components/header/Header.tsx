@@ -70,10 +70,6 @@ export default async function Header({
 				)}
             </div>
 			
-			{/* User navigation */}
-			{/* <div className="contenedor">
-			</div> */}
-            
             {/* Page information */}
             <div>
                 <header className="site-header contenedor separador">

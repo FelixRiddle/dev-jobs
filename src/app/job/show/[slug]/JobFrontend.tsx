@@ -1,7 +1,7 @@
 "use client";
 
 import apiUrl from "@/lib/mappings/apiUrl";
-import Job from "@/lib/types/Job";
+import { PopulatedJob } from "@/lib/types/Job";
 import Link from "next/link";
 
 /**
@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function JobFrontend({
 	job,
 }: {
-	job: Job,
+	job: PopulatedJob,
 }) {
 	const url = apiUrl();
 	
@@ -55,6 +55,21 @@ export default function JobFrontend({
 						})}
 					</ul>
 				</aside>
+			</div>
+			
+			<div className="contenedor datos-reclutador">
+				<div className="enviar-datos"></div>
+				
+				<div className="info-reclutador">
+					<h2>Employer information</h2>
+					<p
+						className={"user-navbar-element"}
+						style={{ display: "inline" }}
+					>{job.author.name}</p>
+					{job.author.image && (
+						<img src={`${url}/uploads/profile/${job.author.image}`} alt="Employer image" />
+					)}
+				</div>
 			</div>
 		</div>
 	);

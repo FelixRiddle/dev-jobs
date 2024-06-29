@@ -6,13 +6,13 @@ import { redirect } from "next/navigation";
 import Header from "@/components/header/Header";
 import apiUrl from "@/lib/mappings/apiUrl";
 import JobFrontend from "./JobFrontend";
-import Job from "@/lib/types/Job";
+import { PopulatedJob } from "@/lib/types/Job";
 import optionalUser from "@/lib/auth/optionalUser";
 
 /**
  * Fetch job data
  */
-export async function getJobDataByUrl(jobUrl: string): Promise<Job | undefined> {
+export async function getJobDataByUrl(jobUrl: string): Promise<PopulatedJob | undefined> {
 	try {
 		const url = apiUrl();
 		
