@@ -19,7 +19,7 @@ export default function createAxiosInstance() {
 	}
 	
 	const instance = axios.create({
-		withCredentials: true,
+		withCredentials: token ? true : false,
 		baseURL: url,
 		headers
 	});

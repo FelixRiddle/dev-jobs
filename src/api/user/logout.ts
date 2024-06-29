@@ -4,7 +4,7 @@ import createAxiosInstance from "@/lib/createAxiosInstance";
 import Status from "@/lib/types/Status";
 import { cookies } from "next/headers";
 
-interface NormalResponse {
+export interface NormalResponse {
 	messages: Array<Status>;
 }
 

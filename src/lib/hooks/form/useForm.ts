@@ -9,6 +9,8 @@ import useStatusMessages from "../useStatusMessages";
  * Easily send requests to the backend with automatic form data fetching.
  * 
  * Also uses status messages to display information.
+ * 
+ * If an attempt to upload a file is made, the default behavior is to ignore the file
  */
 export default function useForm({
 	callback,
@@ -41,7 +43,19 @@ export default function useForm({
 			...externalState,
 		};
 		const formData = new FormData(form.current);
-		formData.forEach((value, key) => formObjectData[key] = value);
+		formData.forEach((value, key) => {
+			// Check if it's a file
+			const isFile = value instanceof File;
+			if(!isFile) {
+                formObjectData[key] = value;
+            } else {
+				// Check if it's development
+				if(process.env.NODE_ENV === "development") {
+					console.warn("WARNING(useForm): An attempt to upload a file was made, this behavior is not supported.");
+                    console.warn(`File: ${key} - ${value.name}`);
+                }
+			}
+		});
 		
 		// Call api function
 		const data = await callback(formObjectData);
