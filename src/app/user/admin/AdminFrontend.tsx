@@ -88,7 +88,7 @@ export default function AdminFrontend({
 									</p>
 								</div>
 								<div className="centrar-vertical caja">
-									<a href={`/candidates/${job._id}`} className="btn btn-amarillo">Candidates</a>
+									<a href={`/job/candidates/${job._id}`} className="btn btn-amarillo">Candidates</a>
 								</div>
 								<div className="centrar-vertical caja">
 									<a href={`/job/edit/${job.url}`} className="btn btn-verde">Edit</a>
